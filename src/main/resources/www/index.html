@@ -6,6 +6,34 @@
         <div ng-controller="AvailabilityCtrl" ng-init="loadData()">
             <div ng-repeat="camp in data">
                 <h1>{{camp.name}}</h1>
+                <table border="1">
+                    <thead>
+                    <tr>
+                        <th>Swimming Beach</th>
+                        <th>Bike Trails</th>
+                        <th>Hiking Trails</th>
+                        <th>Shower</th>
+                        <th>Flush Toilets</th>
+                        <th>Water Faucets</th>
+                        <th>Dump Station</th>
+                        <th>No Motor Boats</th>
+                        <th>Firewood</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td align="center">{{camp.swimmingBeach}}</td>
+                        <td align="center">{{camp.bikeTrails}}</td>
+                        <td align="center">{{camp.hikingTrails}}</td>
+                        <td align="center">{{camp.shower}}</td>
+                        <td align="center">{{camp.flushToilets}}</td>
+                        <td align="center">{{camp.waterFaucets}}</td>
+                        <td align="center">{{camp.dumpStation}}</td>
+                        <td align="center">{{camp.noMotorBoats}}</td>
+                        <td align="center">{{camp.firewoodAvailable}}</td>
+                    </tr>
+                    </tbody>
+                </table>
                 <table>
                     <thead>
                     <tr>

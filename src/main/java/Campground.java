@@ -6,6 +6,16 @@ import java.util.List;
 public class Campground {
     private String name;
     private List<CampAvailability> availabilityHistory;
+    private boolean swimmingBeach;
+    private boolean bikeTrails;
+    private boolean hikingTrails;
+    private boolean shower;
+    private boolean flushToilets;
+    private boolean waterFaucets;
+    private boolean dumpStation;
+    private boolean noMotorBoats;
+    private boolean firewoodAvailable;
+
 
     public String getName() {
         return name;
@@ -21,6 +31,78 @@ public class Campground {
 
     public void setAvailabilityHistory(List<CampAvailability> availabilityHistory) {
         this.availabilityHistory = availabilityHistory;
+    }
+
+    public boolean isSwimmingBeach() {
+        return swimmingBeach;
+    }
+
+    public void setSwimmingBeach(boolean swimmingBeach) {
+        this.swimmingBeach = swimmingBeach;
+    }
+
+    public boolean isBikeTrails() {
+        return bikeTrails;
+    }
+
+    public void setBikeTrails(boolean bikeTrails) {
+        this.bikeTrails = bikeTrails;
+    }
+
+    public boolean isHikingTrails() {
+        return hikingTrails;
+    }
+
+    public void setHikingTrails(boolean hikingTrails) {
+        this.hikingTrails = hikingTrails;
+    }
+
+    public boolean isShower() {
+        return shower;
+    }
+
+    public void setShower(boolean shower) {
+        this.shower = shower;
+    }
+
+    public boolean isFlushToilets() {
+        return flushToilets;
+    }
+
+    public void setFlushToilets(boolean flushToilets) {
+        this.flushToilets = flushToilets;
+    }
+
+    public boolean isWaterFaucets() {
+        return waterFaucets;
+    }
+
+    public void setWaterFaucets(boolean waterFaucets) {
+        this.waterFaucets = waterFaucets;
+    }
+
+    public boolean isDumpStation() {
+        return dumpStation;
+    }
+
+    public void setDumpStation(boolean dumpStation) {
+        this.dumpStation = dumpStation;
+    }
+
+    public boolean isNoMotorBoats() {
+        return noMotorBoats;
+    }
+
+    public void setNoMotorBoats(boolean noMotorBoats) {
+        this.noMotorBoats = noMotorBoats;
+    }
+
+    public boolean isFirewoodAvailable() {
+        return firewoodAvailable;
+    }
+
+    public void setFirewoodAvailable(boolean firewoodAvailable) {
+        this.firewoodAvailable = firewoodAvailable;
     }
 
     @Override
