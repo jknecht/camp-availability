@@ -1,29 +1,30 @@
 <html>
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-</head>
-<body ng-app="camp">
-<h1>Hello World</h1>
-<div ng-controller="AvailabilityCtrl" ng-init="loadData()">
-    <table>
-        <thead>
-            <tr>
-                <td>Campground</td>
-                <td>Date</td>
-                <td>Trailer or Tent Sites</td>
-                <td>Tent Only Sites</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="row in data">
-                <td>{{row.campground}}</td>
-                <td>{{row.date}}</td>
-                <td>{{row.trailerOrTentSitesAvailable}}</td>
-                <td>{{row.tentOnlySitesAvailable}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<script src="js/availability.js"></script>
-</body>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    </head>
+    <body ng-app="camp">
+        <div ng-controller="AvailabilityCtrl" ng-init="loadData()">
+            <div ng-repeat="camp in data">
+                <h1>{{camp.name}}</h1>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Trailer or Tent Sites</th>
+                        <th>Tent Only Sites</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in camp.availabilityHistory">
+                        <td>{{row.date}}</td>
+                        <td align="right">{{row.trailerOrTentSitesAvailable}}</td>
+                        <td align="right">{{row.tentOnlySitesAvailable}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <script src="js/availability.js"></script>
+    </body>
 </html>

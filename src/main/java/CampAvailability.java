@@ -3,7 +3,6 @@
  */
 public class CampAvailability {
     private String date;
-    private String campground;
     private int trailerOrTentSitesAvailable;
     private int tentOnlySitesAvailable;
 
@@ -13,14 +12,6 @@ public class CampAvailability {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getCampground() {
-        return campground;
-    }
-
-    public void setCampground(String campground) {
-        this.campground = campground;
     }
 
     public int getTrailerOrTentSitesAvailable() {
@@ -43,7 +34,6 @@ public class CampAvailability {
     public String toString() {
         return "CampAvailability{" +
                 "date='" + date + '\'' +
-                ", campground='" + campground + '\'' +
                 ", trailerOrTentSitesAvailable=" + trailerOrTentSitesAvailable +
                 ", tentOnlySitesAvailable=" + tentOnlySitesAvailable +
                 '}';
