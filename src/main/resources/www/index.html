@@ -6,58 +6,90 @@
     </head>
     <body ng-app="camp">
         <div ng-controller="AvailabilityCtrl" ng-init="loadData()">
-            <div id="chart-control">
-                <select ng-options="camp as camp.name for camp in data" ng-model="camp" ng-change="drawChart()" ></select>
-                Tent Only: <input type="checkbox" ng-model="tentOnly" ng-change="drawChart()">
-            </div>
-            <canvas id="myChart" width="800" height="400"></canvas>
-            <div ng-model="camp">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Swimming Beach</th>
-                        <th>Bike Trails</th>
-                        <th>Hiking Trails</th>
-                        <th>Shower</th>
-                        <th>Flush Toilets</th>
-                        <th>Water Faucets</th>
-                        <th>Dump Station</th>
-                        <th>No Motor Boats</th>
-                        <th>Firewood</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.swimmingBeach"></td>
-                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.bikeTrails"></td>
-                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.hikingTrails"></td>
-                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.shower"></td>
-                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.flushToilets"></td>
-                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.waterFaucets"></td>
-                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.dumpStation"></td>
-                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.noMotorBoats"></td>
-                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.firewoodAvailable"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Trailer or Tent Sites</th>
-                        <th>Tent Only Sites</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="row in camp.availabilityHistory">
-                        <td>{{row.date}}</td>
-                        <td align="right">{{row.trailerOrTentSitesAvailable}}</td>
-                        <td align="right">{{row.tentOnlySitesAvailable}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            Tent Only: <input type="checkbox" ng-model="tentOnly" ng-change="updateUI()"><br>
+
+            <a ng-click="isTable = !isTable">Toggle Chart/Data View</a>
+
+            <div ng-show="!isTable">
+
+                <div id="chart-control">
+                    <select ng-options="camp as camp.name for camp in data" ng-model="camp" ng-change="drawChart()" ></select>
+                </div>
+                <canvas id="myChart" width="800" height="400"></canvas>
+                <div ng-model="camp">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Swimming Beach</th>
+                            <th>Bike Trails</th>
+                            <th>Hiking Trails</th>
+                            <th>Shower</th>
+                            <th>Flush Toilets</th>
+                            <th>Water Faucets</th>
+                            <th>Dump Station</th>
+                            <th>No Motor Boats</th>
+                            <th>Firewood</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.swimmingBeach"></td>
+                            <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.bikeTrails"></td>
+                            <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.hikingTrails"></td>
+                            <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.shower"></td>
+                            <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.flushToilets"></td>
+                            <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.waterFaucets"></td>
+                            <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.dumpStation"></td>
+                            <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.noMotorBoats"></td>
+                            <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.firewoodAvailable"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Trailer or Tent Sites</th>
+                            <th>Tent Only Sites</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in camp.availabilityHistory">
+                            <td>{{row.date}}</td>
+                            <td align="right">{{row.trailerOrTentSitesAvailable}}</td>
+                            <td align="right">{{row.tentOnlySitesAvailable}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
+            <div ng-show="isTable">
+
+            <div>
+                <h1>Daily Averages</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campground</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="camp in dataTable">
+                            <td>{{camp.name}}</td>
+                            <td ng-repeat="avg in camp.dailyAverages track by $index">{{avg | number:2}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
         </div>
         <script src="js/availability.js"></script>
     </body>

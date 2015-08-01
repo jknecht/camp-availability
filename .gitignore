@@ -2,3 +2,4 @@ camp-data-processor.iml
 target/
 .idea/
 dependency-reduced-pom.xml
+camp-data-processor-1.0-SNAPSHOT.jar

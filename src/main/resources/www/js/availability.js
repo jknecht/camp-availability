@@ -2,6 +2,14 @@ var app = angular.module("camp", []);
 var chart = undefined;
 
 app.controller("AvailabilityCtrl", function($scope, $http) {
+
+    $scope.updateUI = function() {
+        $scope.buildTable();
+        if (!$scope.isTable) {
+            $scope.drawChart();
+        }
+    }
+
     $scope.drawChart = function() {
         if (chart) {
             chart.destroy();
@@ -38,6 +46,9 @@ app.controller("AvailabilityCtrl", function($scope, $http) {
             }
         }
         console.log(data);
+
+
+
         var ctx = document.getElementById("myChart").getContext("2d");
 
         var options = {
@@ -92,11 +103,45 @@ app.controller("AvailabilityCtrl", function($scope, $http) {
         chart = new Chart(ctx).Line(data, options);
     };
 
+    $scope.buildTable = function() {
+        $scope.dataTable = [];
+        var total = 0;
+
+        for (var i in $scope.data) {
+            var camp = {};
+            camp.name = $scope.data[i].name;
+            camp.days = [[], [], [], [], [], [], []];
+            camp.dailyAverages = [0, 0, 0, 0, 0, 0, 0];
+
+            var availabilityArray = $scope.data[i].availabilityHistory;
+            for(var j in availabilityArray) {
+                var day = availabilityArray[j];
+                var dt = new Date(day.date);
+                if ($scope.tentOnly) {
+                    camp.days[dt.getDay()].push(availabilityArray[j].tentOnlySitesAvailable);
+                } else {
+                    camp.days[dt.getDay()].push(availabilityArray[j].trailerOrTentSitesAvailable);
+                }
+            }
+            $scope.dataTable.push(camp);
+
+            for(var j in camp.dailyAverages) {
+                total = 0;
+                for (var k in camp.days[j]) {
+                    total += camp.days[j][k];
+                }
+                camp.dailyAverages[j] = total / camp.days[j].length;
+            }
+        }
+        console.log($scope.dataTable);
+    };
+
     $scope.loadData = function() {
         $http.get("/data").success(function(data) {
             $scope.data = data;
+            console.log($scope.data);
             $scope.camp = data[0];
-            $scope.drawChart();
+            $scope.updateUI();
         }).error(function() {
             alert("Error getting data");
         });
