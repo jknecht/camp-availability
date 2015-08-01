@@ -1,23 +1,13 @@
 var app = angular.module("camp", []);
 
 app.controller("AvailabilityCtrl", function($scope, $http) {
-    $scope.tentOnly = true;
-    $scope.selectedCamp;
-
-    $scope.selectCamp = function() {
-        $scope.selectedCamp = $scope.camp;
-        console.log($scope.selectedCamp);
-
-        $scope.drawChart();
-    }
-
     $scope.drawChart = function() {
         var data = {
             labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
             datasets: []
         };
 
-        var availabilityArray = $scope.selectedCamp.availabilityHistory;
+        var availabilityArray = $scope.camp.availabilityHistory;
         for(var i in availabilityArray) {
             var day = availabilityArray[i];
             var dt = new Date(day.date);
@@ -100,6 +90,8 @@ app.controller("AvailabilityCtrl", function($scope, $http) {
     $scope.loadData = function() {
         $http.get("/data").success(function(data) {
             $scope.data = data;
+            $scope.camp = data[0];
+            $scope.drawChart();
         }).error(function() {
             alert("Error getting data");
         });

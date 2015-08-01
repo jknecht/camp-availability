@@ -6,12 +6,11 @@
     <body ng-app="camp">
         <div ng-controller="AvailabilityCtrl" ng-init="loadData()">
             <div id="chart-div">
-                <select ng-options="camp as camp.name for camp in data" ng-model="selectedCamp" ng-change="drawChart()" ></select>
+                <select ng-options="camp as camp.name for camp in data" ng-model="camp" ng-change="drawChart()" ></select>
                 Tent Only: <input type="checkbox" ng-model="tentOnly" ng-change="drawChart()">
             </div>
             <canvas id="myChart" width="400" height="400"></canvas>
-            <div ng-repeat="camp in data">
-                <h1>{{camp.name}}</h1>
+            <div ng-model="camp">
                 <table border="1">
                     <thead>
                     <tr>
@@ -28,15 +27,15 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td align="center">{{camp.swimmingBeach}}</td>
-                        <td align="center">{{camp.bikeTrails}}</td>
-                        <td align="center">{{camp.hikingTrails}}</td>
-                        <td align="center">{{camp.shower}}</td>
-                        <td align="center">{{camp.flushToilets}}</td>
-                        <td align="center">{{camp.waterFaucets}}</td>
-                        <td align="center">{{camp.dumpStation}}</td>
-                        <td align="center">{{camp.noMotorBoats}}</td>
-                        <td align="center">{{camp.firewoodAvailable}}</td>
+                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.swimmingBeach"></td>
+                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.bikeTrails"></td>
+                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.hikingTrails"></td>
+                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.shower"></td>
+                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.flushToilets"></td>
+                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.waterFaucets"></td>
+                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.dumpStation"></td>
+                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.noMotorBoats"></td>
+                        <td align="center"><input type="checkbox" disabled="disabled" ng-model="camp.firewoodAvailable"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -56,6 +55,9 @@
                     </tr>
                     </tbody>
                 </table>
+            </div>
+            <div>
+                <button ng-click="loadData()">Refresh Data</button>
             </div>
 
         </div>
