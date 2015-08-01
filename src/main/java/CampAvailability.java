@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 /**
  * Created by jeff on 7/18/15.
  */
@@ -38,4 +40,11 @@ public class CampAvailability {
                 ", tentOnlySitesAvailable=" + tentOnlySitesAvailable +
                 '}';
     }
+
+    public static final Comparator<CampAvailability> dateComparator = new Comparator<CampAvailability>() {
+        @Override
+        public int compare(CampAvailability o1, CampAvailability o2) {
+            return o1.getDate().compareTo(o2.getDate());
+        }
+    };
 }

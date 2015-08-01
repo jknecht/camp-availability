@@ -6,6 +6,7 @@ import org.jsoup.select.Elements;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -67,6 +68,7 @@ public class CampAvailabilityReader {
                     }
 
                     campground.getAvailabilityHistory().add(availability);
+                    Collections.sort(campground.getAvailabilityHistory(), CampAvailability.dateComparator);
                 }
             }
 
