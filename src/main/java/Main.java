@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         CampAvailabilityReader reader = new CampAvailabilityReader();
         List<Campground> campgrounds = reader.read(new File("data"));
-        campgrounds.forEach(campAvailability -> System.out.println(campAvailability));
+        //campgrounds.forEach(campAvailability -> System.out.println(campAvailability));
 
         Gson gson = new Gson();
         Spark.staticFileLocation("/www");
