@@ -2,16 +2,17 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
         <script src="js/Chart.min.js"></script>
+        <link rel="stylesheet" href="css/foundation.css">
     </head>
     <body ng-app="camp">
         <div ng-controller="AvailabilityCtrl" ng-init="loadData()">
-            <div id="chart-div">
+            <div id="chart-control">
                 <select ng-options="camp as camp.name for camp in data" ng-model="camp" ng-change="drawChart()" ></select>
                 Tent Only: <input type="checkbox" ng-model="tentOnly" ng-change="drawChart()">
             </div>
-            <canvas id="myChart" width="400" height="400"></canvas>
+            <canvas id="myChart" width="800" height="400"></canvas>
             <div ng-model="camp">
-                <table border="1">
+                <table>
                     <thead>
                     <tr>
                         <th>Swimming Beach</th>
