@@ -1,15 +1,23 @@
 var app = angular.module("camp", []);
 
 app.controller("AvailabilityCtrl", function($scope, $http) {
+    $scope.tentOnly = true;
+    $scope.selectedCamp;
 
-    $scope.updateChart = function() {
+    $scope.selectCamp = function() {
+        $scope.selectedCamp = $scope.camp;
+        console.log($scope.selectedCamp);
+
+        $scope.drawChart();
+    }
+
+    $scope.drawChart = function() {
         var data = {
             labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
             datasets: []
         };
 
-        console.log($scope.camp);
-        var availabilityArray = $scope.camp.availabilityHistory;
+        var availabilityArray = $scope.selectedCamp.availabilityHistory;
         for(var i in availabilityArray) {
             var day = availabilityArray[i];
             var dt = new Date(day.date);
@@ -28,7 +36,11 @@ app.controller("AvailabilityCtrl", function($scope, $http) {
                 dataset.label = "Week " + (datasetIndex + 1);
                 data.datasets.push(dataset);
             }
-            dataset.data[dt.getDay()] = day.trailerOrTentSitesAvailable;
+            if ($scope.tentOnly) {
+                dataset.data[dt.getDay()] = day.tentOnlySitesAvailable;
+            } else {
+                dataset.data[dt.getDay()] = day.trailerOrTentSitesAvailable;
+            }
         }
         console.log(data);
         var ctx = document.getElementById("myChart").getContext("2d");
