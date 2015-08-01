@@ -1,7 +1,12 @@
 var app = angular.module("camp", []);
+var chart = undefined;
 
 app.controller("AvailabilityCtrl", function($scope, $http) {
     $scope.drawChart = function() {
+        if (chart) {
+            chart.destroy();
+        }
+
         var data = {
             labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
             datasets: []
@@ -84,7 +89,7 @@ app.controller("AvailabilityCtrl", function($scope, $http) {
 
                       };
 
-        var myLineChart = new Chart(ctx).Line(data, options);
+        chart = new Chart(ctx).Line(data, options);
     };
 
     $scope.loadData = function() {
